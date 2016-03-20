@@ -43,13 +43,6 @@ int main()
 			[av](int i) { return i >= av; };
 		};
 
-	//В задании написано:
-	//	"Например, введены числа:
-	//	1 3 6 3 0
-	//	Надо напечатать 1 3 3  (они _больше_ среднеарифметического 3.25)"
-
-	//Похоже, что тут ошибка и нужно написать только 6? 
-
 	auto result = filter<int>(greater_than(average), nums);
 	for_each(result.begin(), result.end(), [](int n) {std::cout << n << " "; });
 	std::cout << std::endl;

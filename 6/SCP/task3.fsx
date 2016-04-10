@@ -1,7 +1,6 @@
 ﻿// Learn more about F# at http://fsharp.org
 // See the 'F# Tutorial' project for more help.
 #if INTERACTIVE
-//#load "C:\\Users\\admin\\Google Диск\\Code\\Project\\F#\\SCP\\p3\\p3\\Script3.fsx";;
 #r "C:\\Program Files (x86)\\MySQL\\Connector.NET 6.9\\Assemblies\\v2.0\\MySql.Data.dll"
 #r "C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.5.2\\System.Configuration.dll"
 #r "C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.5.2\\System.Transactions.dll"

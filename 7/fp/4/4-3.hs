@@ -1,28 +1,18 @@
-{- похоже, что это слишком медленно -}
-(+++) xs x = xs ++ [x]
+isUp (x:y:xs) = if x < y then isUp (y:xs) else False
+isUp _ = True
 
-parts2 xs = if length xs `mod` 2 == 0 then ans else undefined where 
+parts2 xs = f' [] [] xs where
+    u_bound = length xs `div` 2
 
-    isUp (x:y:xs) = if x < y then isUp (y:xs) else False
-    isUp _ = True
+    f' a b [] = True
+    f' a b (c:cs) =
+        let n_a = a ++ [c] in
+        let n_b = b ++ [c] in
 
-    unzip acc1 acc2 [] = (acc1,acc2)
-    unzip acc1 acc2 ((x,1):xs) = unzip (acc1 +++ x) (acc2) xs
-    unzip acc1 acc2 ((x,2):xs) = unzip (acc1) (acc2 +++ x) xs
+        let b1 = isUp n_a && length n_a <= u_bound in
+        let b2 = isUp n_b && length n_b <= u_bound in 
 
-    part [] = undefined
-    part (x:xs) = (x,1) : part' x xs where
-        part' n [] = []
-        part' n (x:xs) = if n < x then (x,0) : part' x xs else (x,2) : part' n xs 
+        let l = if b1 then f' n_a b cs else False in
+        let r = if b2 then f' a n_b cs else False in
 
-    c m xs = c' m [] xs where
-        c' 0 acc ((x,0):xs) = c' 0 (acc +++ (x,2)) xs
-        c' 0 acc (x:xs) = c' 0 (acc +++ x) xs
-        c' 0 acc [] = [acc]
-        c' m acc [] = []
-        c' m acc ((x,0):xs) = c' (m-1) (acc +++ (x,1)) xs ++ c' m (acc +++ (x,2)) xs 
-        c' m acc (x:xs) = c' m (acc +++ x) xs
-
-    t1 = c (length xs `div` 2 - 1) (part xs)
-    t2 = map (unzip [] []) t1
-    ans = (t2,filter (\(x,y) -> isUp y) t2)
+        l || r
